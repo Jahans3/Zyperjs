@@ -8,8 +8,9 @@ const opts = {
 
 class Zyper {
   constructor(config) {
-    this.buildLabel(config);
-    this.getTextFields(config.textFields);
+    this.config = config;
+    this.buildLabel(this.config);
+    this.getTextFields(this.hasProperty('textFields'));
   }
 
   /**
@@ -56,17 +57,27 @@ class Zyper {
     this.ZyperText.innerHTML = e.target.value;
   }
   
+  hasProperty(option) {
+    const hasProp = this.config.hasOwnProperty(option);
+    
+    if (hasProp) {
+      return this.config[option];
+    }
+    
+    return false;
+  }
+  
   /**
    * Build Zyper and assign to class variables
    */
   buildLabel(config) {
     const wrapper = document.createElement('div');
     const textField = document.createElement('span');
-    const customClass = config.customClass || '';
-    const backgroundColor = config.backgroundColor || 'rgb(37, 51, 66)';
-    const textColor = config.textColor || '#fff';
-    const borderColor = config.borderColor || '#fff';
-    const borderRadius = config.borderRadius || '6px';
+    const customClass = this.hasProperty('customClass') || '';
+    const backgroundColor = this.hasProperty('backgroundColor') || 'rgb(37, 51, 66)';
+    const textColor = this.hasProperty('textColor') || '#fff';
+    const borderColor = this.hasProperty('borderColor') || '#fff';
+    const borderRadius = this.hasProperty('borderRadius') || '6px';
     const font = config.font || '"Lucida Grande", Helvetica, Arial, sans-serif';
 
     wrapper.className = `zyper ${customClass}`;

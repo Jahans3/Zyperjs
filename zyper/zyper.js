@@ -8,20 +8,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Created by jahansj on 10/09/2016.
  */
 
-// Must take config object, first option is to target all text input or only a specific class 
-// if no specific class provided uses default .zyper (or something)
-
 var opts = {
-  // A selector to match the text fields | true - indicating all fields | empty string - indicating '[data-zyper="true"]'
-  textFields: true //'.form-wrap [type="text"]'
+  textFields: true
 };
 
 var Zyper = function () {
   function Zyper(config) {
     _classCallCheck(this, Zyper);
 
-    this.buildLabel(config);
-    this.getTextFields(config.textFields);
+    this.config = config;
+    this.buildLabel(this.config);
+    this.getTextFields(this.hasProperty('textFields'));
   }
 
   /**
@@ -80,6 +77,17 @@ var Zyper = function () {
 
       this.ZyperText.innerHTML = e.target.value;
     }
+  }, {
+    key: 'hasProperty',
+    value: function hasProperty(option) {
+      var hasProp = this.config.hasOwnProperty(option);
+
+      if (hasProp) {
+        return this.config[option];
+      }
+
+      return false;
+    }
 
     /**
      * Build Zyper and assign to class variables
@@ -90,11 +98,11 @@ var Zyper = function () {
     value: function buildLabel(config) {
       var wrapper = document.createElement('div');
       var textField = document.createElement('span');
-      var customClass = config.customClass || '';
-      var backgroundColor = config.backgroundColor || 'rgb(37, 51, 66)';
-      var textColor = config.textColor || '#fff';
-      var borderColor = config.borderColor || '#fff';
-      var borderRadius = config.borderRadius || '6px';
+      var customClass = this.hasProperty('customClass') || '';
+      var backgroundColor = this.hasProperty('backgroundColor') || 'rgb(37, 51, 66)';
+      var textColor = this.hasProperty('textColor') || '#fff';
+      var borderColor = this.hasProperty('borderColor') || '#fff';
+      var borderRadius = this.hasProperty('borderRadius') || '6px';
       var font = config.font || '"Lucida Grande", Helvetica, Arial, sans-serif';
 
       wrapper.className = 'zyper ' + customClass;

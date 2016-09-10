@@ -29,32 +29,44 @@ Options are passed in by an object, if an option is not specified Zyper will fal
 
 #### textFields
 
-Pass in a CSS selector to target specific text inputs.
+Pass in a CSS selector as a string to target specific text inputs.
 
-Pass `true` selects all text inputs on the page.
+Passing `true` selects all text inputs on the page.
 
 Leaving this option blank specifies all text inputs with the data attribute `data-zyper="true"`.
 
 #### customClass
 
-Pass in a custom class to Zyper.
+Pass in a custom class as a string.
 
 Leaving this option blank has no effect.
 
 #### backgroundColor
 
-Pass in a color, accepts text, hex and rgba.
+Pass in a color as a string, accepts text, hex and rgba.
 
-Leaving this option blank defaults to black.
+Leaving this option blank defaults to a dark blue.
+
+#### font
+
+Pass in a font as a string.
+
+Leaving this option blank defaults to `"Lucida Grande", Helvetica, Arial, sans-serif`.
 
 #### textColor
 
-Pass in a text color, accepts text, hex and rgba.
+Pass in a text color as a string, accepts text, hex and rgba.
 
 Leaving this option blank defaults to white.
 
 #### borderColor
 
-Pass in a border color, accepts text, hex and rgba.
+Pass in a border color as a string, accepts text, hex and rgba.
 
 Leaving this option blank defaults to white.
+
+#### borderRadius
+
+Pass in a pixel or percentage value as a string.
+
+Leaving this option blank defaults to 6px.

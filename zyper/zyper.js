@@ -58,10 +58,12 @@ var Zyper = function () {
         inputs[i].addEventListener('focus', function (e) {
           return _this.activateLabel(e);
         });
-        inputs[i].addEventListener('keyup', function (e) {
+        inputs[i].addEventListener('input', function (e) {
           return _this.onType(e);
         });
-        //inputs[i].addEventListener('blur', e => this.disableLabel());
+        inputs[i].addEventListener('blur', function () {
+          return _this.disableLabel();
+        });
       }
     }
 
@@ -89,22 +91,27 @@ var Zyper = function () {
       var wrapper = document.createElement('div');
       var textField = document.createElement('span');
       var customClass = config.customClass || '';
-      var backgroundColor = config.backgroundColor || '#000';
+      var backgroundColor = config.backgroundColor || 'rgb(37, 51, 66)';
       var textColor = config.textColor || '#fff';
       var borderColor = config.borderColor || '#fff';
+      var borderRadius = config.borderRadius || '6px';
+      var font = config.font || '"Lucida Grande", Helvetica, Arial, sans-serif';
 
       wrapper.className = 'zyper ' + customClass;
       wrapper.style.width = '100px';
       wrapper.style.height = '50px';
-      wrapper.style.backgroundColor = '' + backgroundColor;
-      wrapper.style.border = '2px solid ' + borderColor;
-      wrapper.style.borderRadius = '6px';
+      wrapper.style.backgroundColor = backgroundColor;
+      wrapper.style.border = '4px solid ' + borderColor;
+      wrapper.style.borderRadius = borderRadius;
       wrapper.style.display = 'none';
       wrapper.style.position = 'absolute';
+      wrapper.style.padding = '3px 7px';
+      wrapper.style.margin = '0';
 
+      textField.style.font = font;
       textField.style.height = '100%';
       textField.style.width = '100%';
-      textField.style.color = '' + textColor;
+      textField.style.color = textColor;
 
       wrapper.appendChild(textField);
       document.body.appendChild(wrapper);
@@ -115,7 +122,7 @@ var Zyper = function () {
 
     /**
      * Display Zyper and position above active input
-     * @param input
+     * @param e
      */
 
   }, {

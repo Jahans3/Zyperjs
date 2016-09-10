@@ -5,8 +5,6 @@ Zyper will attach itself to the text fields you specify then enlarge and mirror 
 
 Recommended to be used with text inputs where accuracy is crucial to a good UX, eg. a payment form.
 
-<img src="http://i.imgur.com/OLnIR3N.gif" alt="preview" style="width: 150px; height: 150px;"/>
-
 ## Usage
 
 Adding Zyper to your website is designed to be simple and fast, while still offering maximum configuration.

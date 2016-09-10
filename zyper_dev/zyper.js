@@ -2,12 +2,8 @@
  * Created by jahansj on 10/09/2016.
  */
 
-// Must take config object, first option is to target all text input or only a specific class 
-// if no specific class provided uses default .zyper (or something)
-
 const opts = {
-  // A selector to match the text fields | true - indicating all fields | empty string - indicating '[data-zyper="true"]'
-  textFields: true//'.form-wrap [type="text"]'
+  textFields: true
 };
 
 class Zyper {

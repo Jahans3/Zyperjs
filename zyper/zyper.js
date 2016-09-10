@@ -13,20 +13,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 var opts = {
   // A selector to match the text fields | true - indicating all fields | empty string - indicating '[data-zyper="true"]'
-  textFields: '.form-wrap [type="text"]'
+  textFields: true //'.form-wrap [type="text"]'
 };
 
 var Zyper = function () {
   function Zyper(config) {
     _classCallCheck(this, Zyper);
 
-    console.log('init');
-
-    this.inputs = this.getTextFields(config.textFields);
+    this.buildLabel(config);
+    this.getTextFields(config.textFields);
   }
 
   /**
-   * Get text inputs and bind events to
+   * Get text inputs and bind events
    * @param textFields
    * @returns {*}
    */
@@ -40,9 +39,9 @@ var Zyper = function () {
       var selector = void 0;
 
       if (textFields === true) {
-        selector = '[type="text"][data-zyper="true"]';
-      } else if (!textFields) {
         selector = '[type="text"]';
+      } else if (!textFields) {
+        selector = '[type="text"][data-zyper="true"]';
       } else {
         selector = textFields;
       }
@@ -56,33 +55,116 @@ var Zyper = function () {
       }
 
       for (var i = 0, length = inputs.length; i < length; i++) {
-        inputs[i].addEventListener('keydown', function (e) {
-          return _this.onType(e);
+        inputs[i].addEventListener('focus', function (e) {
+          return _this.activateLabel(e.target);
         });
         inputs[i].addEventListener('keyup', function (e) {
           return _this.onType(e);
         });
+        inputs[i].addEventListener('blur', function (e) {
+          return _this.disableLabel();
+        });
       }
-
-      console.log(inputs);
-
-      return inputs;
     }
+
+    /**
+     * Input handler
+     * @param e
+     */
+
   }, {
     key: 'onType',
     value: function onType(e) {
       e = e || window.event;
       e.stopPropagation();
 
-      var input = e.target;
-      var val = e.target.value;
+      this.ZyperText.innerHTML = e.target.value;
+    }
 
-      // temp
-      // later we will build an element that appears above the active text box
-      // and fill in that text box with this text
-      // need to display a label (or any suitable element) directly above the active text input only
-      // need to display this label above the input but out of the workflow so doesn't interfere with host page
-      document.querySelector('.temp-box').innerHTML = val;
+    /**
+     * Build Zyper and assign to class variables
+     */
+
+  }, {
+    key: 'buildLabel',
+    value: function buildLabel(config) {
+      var wrapper = document.createElement('div');
+      var textField = document.createElement('span');
+      var customClass = config.customClass || '';
+      var backgroundColor = config.backgroundColor || '#000';
+      var textColor = config.textColor || '#fff';
+      var borderColor = config.borderColor || '#fff';
+
+      wrapper.className = 'zyper ' + customClass;
+      wrapper.style.width = '100px';
+      wrapper.style.height = '50px';
+      wrapper.style.backgroundColor = '' + backgroundColor;
+      wrapper.style.border = '2px solid ' + borderColor;
+      wrapper.style.borderRadius = '6px';
+      wrapper.style.display = 'none';
+      wrapper.style.position = 'absolute';
+
+      textField.style.height = '100%';
+      textField.style.width = '100%';
+      textField.style.color = '' + textColor;
+
+      wrapper.appendChild(textField);
+      document.body.appendChild(wrapper);
+
+      this.Zyper = wrapper;
+      this.ZyperText = textField;
+    }
+
+    /**
+     * Display Zyper and position above active input
+     * @param input
+     */
+
+  }, {
+    key: 'activateLabel',
+    value: function activateLabel(input) {
+      var height = this.getStyle(input, 'height', true);
+      var width = this.getStyle(input, 'width');
+      var fontSize = this.getStyle(input, 'font-size', true) * 2;
+      var X = input.offsetLeft;
+      var Y = input.offsetTop;
+
+      this.ZyperText.innerHTML = input.value;
+      this.ZyperText.style.fontSize = fontSize + 'px';
+      this.Zyper.style.left = X + 'px';
+      this.Zyper.style.top = Y - height * 3 + 'px';
+      this.Zyper.style.height = height * 2 + 'px';
+      this.Zyper.style.minWidth = width;
+      this.Zyper.style.width = 'auto';
+      this.Zyper.style.display = 'block';
+    }
+
+    /**
+     * Hide Zyper
+     */
+
+  }, {
+    key: 'disableLabel',
+    value: function disableLabel() {
+      this.ZyperText.innerHTML = '';
+      this.Zyper.style.display = 'none';
+    }
+
+    /**
+     * Return computed style of an element
+     * @param element
+     * @param property
+     * @param noPx
+     * @returns {string}
+     */
+
+  }, {
+    key: 'getStyle',
+    value: function getStyle(element, property, noPx) {
+      if (noPx) {
+        return window.getComputedStyle(element).getPropertyValue(property).split('p')[0];
+      }
+      return window.getComputedStyle(element).getPropertyValue(property);
     }
   }]);
 

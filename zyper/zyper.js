@@ -92,7 +92,7 @@ var Zyper = function () {
       var textColor = this.hasProperty('textColor') || '#fff';
       var borderColor = this.hasProperty('borderColor') || '#fff';
       var borderRadius = this.hasProperty('borderRadius') || '6px';
-      var font = config.font || '"Lucida Grande", Helvetica, Arial, sans-serif';
+      var font = this.hasProperty('font') || '"Lucida Grande", Helvetica, Arial, sans-serif';
 
       wrapper.className = 'zyper ' + customClass;
       wrapper.style.width = '100px';

@@ -68,7 +68,7 @@ class Zyper {
     const textColor = this.hasProperty('textColor') || '#fff';
     const borderColor = this.hasProperty('borderColor') || '#fff';
     const borderRadius = this.hasProperty('borderRadius') || '6px';
-    const font = config.font || '"Lucida Grande", Helvetica, Arial, sans-serif';
+    const font = this.hasProperty('font') || '"Lucida Grande", Helvetica, Arial, sans-serif';
 
     wrapper.className = `zyper ${customClass}`;
     wrapper.style.width = '100px';

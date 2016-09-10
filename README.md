@@ -1,7 +1,7 @@
 # Zyperjs
 Designed for users who don't have perfect eyes, but whose eyesight is not bad enough for them to have assisting software such as a screen reader.
 
-Zyper will attach itself to the text fields you specify then enlarge and mirror the user's text input above in a clear.
+Zyper will attach itself to the text fields you specify then enlarge and mirror the user's text input above in a clear format.
 
 Recommended to be used with text inputs where accuracy is crucial to a good UX, eg. a payment form.
 

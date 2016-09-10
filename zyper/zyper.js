@@ -77,17 +77,6 @@ var Zyper = function () {
 
       this.ZyperText.innerHTML = e.target.value;
     }
-  }, {
-    key: 'hasProperty',
-    value: function hasProperty(option) {
-      var hasProp = this.config.hasOwnProperty(option);
-
-      if (hasProp) {
-        return this.config[option];
-      }
-
-      return false;
-    }
 
     /**
      * Build Zyper and assign to class variables
@@ -178,7 +167,26 @@ var Zyper = function () {
       if (noPx) {
         return window.getComputedStyle(element).getPropertyValue(property).split('p')[0];
       }
+
       return window.getComputedStyle(element).getPropertyValue(property);
+    }
+
+    /**
+     * Safely check for properties
+     * @param option
+     * @returns {*}
+     */
+
+  }, {
+    key: 'hasProperty',
+    value: function hasProperty(option) {
+      var hasProp = this.config.hasOwnProperty(option);
+
+      if (hasProp) {
+        return this.config[option];
+      }
+
+      return false;
     }
   }]);
 

@@ -57,16 +57,6 @@ class Zyper {
     this.ZyperText.innerHTML = e.target.value;
   }
   
-  hasProperty(option) {
-    const hasProp = this.config.hasOwnProperty(option);
-    
-    if (hasProp) {
-      return this.config[option];
-    }
-    
-    return false;
-  }
-  
   /**
    * Build Zyper and assign to class variables
    */
@@ -144,7 +134,23 @@ class Zyper {
     if (noPx) {
       return window.getComputedStyle(element).getPropertyValue(property).split('p')[0];
     }
+
     return window.getComputedStyle(element).getPropertyValue(property);
+  }
+
+  /**
+   * Safely check for properties
+   * @param option
+   * @returns {*}
+   */
+  hasProperty(option) {
+    const hasProp = this.config.hasOwnProperty(option);
+
+    if (hasProp) {
+      return this.config[option];
+    }
+
+    return false;
   }
 }
 

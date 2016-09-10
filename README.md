@@ -1,9 +1,13 @@
 # Zyperjs
-Enlarge text entered into text fields, primarily for those with poor eyesight but also suitable many other purposes.
+Designed for users who don't have perfect eyes, but whose eyesight is not bad enough for them to have assisting software such as a screen reader.
+
+Zyper will attach itself to the text fields you specify then enlarge and mirror the user's text input above in a clear.
+
+Recommended to be used with text inputs where accuracy is crucial to a good UX, eg. a payment form.
 
 ## Usage
 
-Adding Zyper to your website is designed to be simple and fast:
+Adding Zyper to your website is designed to be simple and fast, while still offering maximum configuration.
 
 Simply include Zyperjs on your page:
 
@@ -11,7 +15,13 @@ Simply include Zyperjs on your page:
 
 Then call Zyper and pass in your configuration options:
 
-`new Zyper(options)`
+    const options = {
+        textFields: '.form-wrap [type="text"]',
+        backgroundColor: '#2980b9',
+        borderColor: '#e1e1e1'
+    };
+    
+    new Zyper(options);
 
 ## List of Options
 

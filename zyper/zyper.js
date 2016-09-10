@@ -56,14 +56,12 @@ var Zyper = function () {
 
       for (var i = 0, length = inputs.length; i < length; i++) {
         inputs[i].addEventListener('focus', function (e) {
-          return _this.activateLabel(e.target);
+          return _this.activateLabel(e);
         });
         inputs[i].addEventListener('keyup', function (e) {
           return _this.onType(e);
         });
-        inputs[i].addEventListener('blur', function (e) {
-          return _this.disableLabel();
-        });
+        //inputs[i].addEventListener('blur', e => this.disableLabel());
       }
     }
 
@@ -122,7 +120,8 @@ var Zyper = function () {
 
   }, {
     key: 'activateLabel',
-    value: function activateLabel(input) {
+    value: function activateLabel(e) {
+      var input = e.target;
       var height = this.getStyle(input, 'height', true);
       var width = this.getStyle(input, 'width');
       var fontSize = this.getStyle(input, 'font-size', true) * 2;
